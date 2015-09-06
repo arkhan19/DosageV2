@@ -7,6 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:timePickerMode="spinner"
        />
     <DatePicker
         android:id="@+id/datePicker"
@@ -15,6 +16,6 @@
         android:layout_below="@id/timePicker"
         android:layout_centerHorizontal="true"
         android:theme="@style/AppTheme"
-        android:calendarViewShown="true" />
+        android:calendarViewShown="false" />
 
 </RelativeLayout>
