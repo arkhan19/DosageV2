@@ -16,6 +16,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".Alpha.AddDosage"
+            android:label="New Dosage" />
+
+
+        <receiver android:name="healerkart.com.dosage.Delta.AlarmSetter">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="healerkart.com.dosage.Delta.AlarmReceiver"></receiver>
+
+        <service android:name="healerkart.com.dosage.Delta.AlarmService"></service>
+
+
+
+
+
     </application>
 
 </manifest>

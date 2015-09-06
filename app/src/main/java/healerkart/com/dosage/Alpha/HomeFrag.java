@@ -12,7 +12,7 @@ import healerkart.com.dosage.R;
 /**
  * Created by f3n1Xx on 29/08/15.
  */
-public class HomeFrag extends Fragment {
+public class HomeFrag extends ListFragment {
     public HomeFrag()
     {}
 

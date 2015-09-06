@@ -15,6 +15,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,7 +38,7 @@ import healerkart.com.dosage.Delta.*;
 import healerkart.com.dosage.R;
 
 
-public class AddDosage extends Activity {
+public class AddDosage extends FragmentActivity {
 
     private SQLiteDatabase db;
     ///
