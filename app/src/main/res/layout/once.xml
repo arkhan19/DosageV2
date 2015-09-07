@@ -16,6 +16,7 @@
         android:layout_below="@id/timePicker"
         android:layout_centerHorizontal="true"
         android:theme="@style/AppTheme"
-        android:calendarViewShown="false" />
+        android:calendarViewShown="false"
+        android:spinnersShown="true"/>
 
 </RelativeLayout>
