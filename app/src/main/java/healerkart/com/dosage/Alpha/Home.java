@@ -70,7 +70,7 @@ public class Home extends ListActivity {
         headingText.setTypeface(font);*/
         monthArr = getResources().getStringArray(R.array.spinner3_arr);
 
-        int r = DosageDB.getDateRange();
+        /*int r = DosageDB.getDateRange();
         switch(r) {
             case 3: // Yearly
                 cal.set(Calendar.MONTH, 0);
@@ -86,7 +86,7 @@ public class Home extends ListActivity {
                 cal.set(Calendar.MINUTE, 0);
                 cal.set(Calendar.SECOND, 0);
                 cal.set(Calendar.MILLISECOND, 0);
-        }
+        }*/
 
         registerForContextMenu(getListView());
 

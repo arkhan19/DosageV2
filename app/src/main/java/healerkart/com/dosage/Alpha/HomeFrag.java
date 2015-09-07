@@ -15,9 +15,10 @@ public class HomeFrag extends Fragment {
     {}
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        Intent firstpage= new Intent(getActivity(),Home.class);
-        getActivity().startActivity(firstpage);
+    public void onCreate(Bundle savedInstanceState)
+    {
+       /* Intent firstpage= new Intent(getActivity(),Home.class);
+        getActivity().startActivity(firstpage);*/
         super.onCreate(savedInstanceState);
     }
 

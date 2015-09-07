@@ -18,7 +18,7 @@ public class DosageDB extends Application {
     public static DBHelper dbHelper;
     public static SQLiteDatabase db;
     public static SharedPreferences sp;
-
+    final static private int SPL = 1;
     public static final String TIME_OPTION = "time_option";
     public static final String DATE_RANGE = "date_range";
     public static final String DATE_FORMAT = "date_format";
@@ -32,11 +32,18 @@ public class DosageDB extends Application {
     public void onCreate() {
         super.onCreate();
 
-        PreferenceManager.setDefaultValues(this,R.xml.settings, false);
-        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        //PreferenceManager.setDefaultValues(this,R.xml.settings, false);
+        //sp = PreferenceManager.getDefaultSharedPreferences(this);
 
         dbHelper = new DBHelper(this);
         db = dbHelper.getWritableDatabase();
+
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sp.getInt("spl", 0) != SPL)
+        {
+            PreferenceManager.setDefaultValues(this, R.xml.settings, true);
+            sp.edit().putInt("spl", SPL).apply();
+        }
     }
 
     public static boolean showRemainingTime() {
@@ -44,7 +51,12 @@ public class DosageDB extends Application {
     }
 
     public static int getDateRange() {
-        return Integer.parseInt(sp.getString(DATE_RANGE, "0"));
+        String ranger = "one";
+        if(ranger!=null){
+            ranger = sp.getString(DATE_RANGE, "0");
+        }
+
+        return Integer.parseInt(ranger);
     }
 
     public static String getDateFormat() {
