@@ -19,6 +19,8 @@
 
         <activity android:name=".Alpha.AddDosage"
             android:label="New Dosage" />
+        <activity android:name=".Alpha.Home"
+            android:label="New Dosage" />
 
 
         <receiver android:name="healerkart.com.dosage.Delta.AlarmSetter">
