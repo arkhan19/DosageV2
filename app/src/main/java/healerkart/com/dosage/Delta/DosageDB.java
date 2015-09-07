@@ -3,12 +3,10 @@ package healerkart.com.dosage.Delta;
 /**
  * Created by f3n1Xx on 16/08/15.
  */
-
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
-
 import healerkart.com.dosage.R;
 
 public class DosageDB extends Application {
@@ -41,7 +39,7 @@ public class DosageDB extends Application {
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         if (sp.getInt("spl", 0) != SPL)
         {
-            PreferenceManager.setDefaultValues(this, R.xml.settings, true);
+            PreferenceManager.setDefaultValues(this,R.xml.settings, false);
             sp.edit().putInt("spl", SPL).apply();
         }
     }

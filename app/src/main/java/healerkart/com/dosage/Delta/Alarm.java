@@ -69,8 +69,8 @@ public class Alarm extends AbstractModel {
 		if (sound != null)
 			cv.put(COL_SOUND, sound ? 1 : 0);		
 		
-		return db.update(TABLE_NAME, cv, COL_ID+" = ?", new String[]{String.valueOf(id)}) 
-				== 1 ? true : false;
+		return db.update(TABLE_NAME, cv, COL_ID + " = ?", new String[]{String.valueOf(id)})
+				== 1;
 	}
 	
 	public boolean load(SQLiteDatabase db) {
@@ -86,7 +86,7 @@ public class Alarm extends AbstractModel {
 				toDate = cursor.getString(cursor.getColumnIndex(COL_TODATE));
 				rule = cursor.getString(cursor.getColumnIndex(COL_RULE));
 				interval = cursor.getString(cursor.getColumnIndex(COL_INTERVAL));
-				sound = cursor.getInt(cursor.getColumnIndex(COL_SOUND)) == 1 ? true : false;
+				sound = cursor.getInt(cursor.getColumnIndex(COL_SOUND)) == 1;
 				return true;
 			}
 			return false;
@@ -108,8 +108,8 @@ public class Alarm extends AbstractModel {
 		db.beginTransaction();
         try {
 			db.delete(AlarmTime.TABLE_NAME, AlarmTime.COL_ALARMID+" = ?", whereArgs);
-			status = db.delete(TABLE_NAME, COL_ID+" = ?", whereArgs)
-					== 1 ? true : false;
+			status = db.delete(TABLE_NAME, COL_ID + " = ?", whereArgs)
+					== 1;
 	        db.setTransactionSuccessful();
 	    } catch (Exception e) {
 	    } finally {
