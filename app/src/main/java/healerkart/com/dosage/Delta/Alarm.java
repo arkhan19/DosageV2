@@ -21,7 +21,8 @@ public class Alarm extends AbstractModel {
 	
 	public static final String HIGH = "H";
 	public static final String MED = "M";
-	public static final String LOW = "L"; 
+	public static final String LOW = "L";
+	boolean up;
 	
 	static String getSql() {
 		return Util.concat("CREATE TABLE ", TABLE_NAME, " (",
@@ -67,10 +68,14 @@ public class Alarm extends AbstractModel {
 		if (interval != null)
 			cv.put(COL_INTERVAL, interval);		
 		if (sound != null)
-			cv.put(COL_SOUND, sound ? 1 : 0);		
-		
-		return db.update(TABLE_NAME, cv, COL_ID + " = ?", new String[]{String.valueOf(id)})
-				== 1;
+			cv.put(COL_SOUND, sound ? 1 : 0);
+
+		int value = db.update(TABLE_NAME, cv, COL_ID+" = ?", new String[]{String.valueOf(id)});
+		up = value == 1;
+
+		return up;
+		/*return db.update(TABLE_NAME, cv, COL_ID + " = ?", new String[]{String.valueOf(id)})
+				== 1;*/
 	}
 	
 	public boolean load(SQLiteDatabase db) {

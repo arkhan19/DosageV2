@@ -1,12 +1,15 @@
+/*
 //DUMMY CLASS TO BE REMOVED. YOU CREATED IT TO CHECK FRAGS INDEPENDETLY
 
 
 
 package healerkart.com.dosage.Alpha;
 
+*/
 /**
  * Created by f3n1Xx on 19/08/15.
- */
+ *//*
+
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -40,7 +43,7 @@ import healerkart.com.dosage.MainActivity;
 import healerkart.com.dosage.R;
 
 
-public class AddDosage extends AppCompatActivity{
+public class AddDosage extends FragmentActivity{
 
 //	private static final String TAG = "AddAlarmActivity";
 
@@ -90,7 +93,6 @@ public class AddDosage extends AppCompatActivity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("New Reminder");
         setContentView(R.layout.add);
         findViews();
         db = DosageDB.db;
@@ -144,7 +146,7 @@ public class AddDosage extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        sdf.applyPattern(DosageDB.getDateFormat());
+       // sdf.applyPattern(DosageDB.getDateFormat());
     }
 
     private void findViews() {
@@ -199,7 +201,9 @@ public class AddDosage extends AppCompatActivity{
         return true;
     }
 
-    /* Save */
+    */
+/* Save *//*
+
     public void create(View v) {
         if (!validate()) return;
 
@@ -339,4 +343,4 @@ public class AddDosage extends AppCompatActivity{
         }
     }
 
-}
+}*/

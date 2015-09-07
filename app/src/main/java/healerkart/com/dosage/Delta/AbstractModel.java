@@ -3,6 +3,7 @@ package healerkart.com.dosage.Delta;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 abstract class AbstractModel {
 	
@@ -40,9 +41,12 @@ abstract class AbstractModel {
 	
 	public long persist(SQLiteDatabase db) {
 		if (id > 0)
+			//Log.d("CREATION","I > 0");
 			return update(db) ? id : 0;
 		else
+			//Log.d("CREATION", "I not 0");
 			return save(db);
+
 	}
 
 }

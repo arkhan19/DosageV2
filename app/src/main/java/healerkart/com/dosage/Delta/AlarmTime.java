@@ -10,6 +10,7 @@ public class AlarmTime extends AbstractModel {
 	public static final String COL_ID = AbstractModel.COL_ID;
 	public static final String COL_ALARMID = "alarm_id";
 	public static final String COL_AT = "at";
+	boolean up;
 	
 	static String getSql() {
 		return Util.concat("CREATE TABLE ", TABLE_NAME, " (",
@@ -34,9 +35,15 @@ public class AlarmTime extends AbstractModel {
 			cv.put(COL_ALARMID, alarmId);
 		if (at != null)
 			cv.put(COL_AT, at);		
-		
-		return db.update(TABLE_NAME, cv, COL_ID+" = ?", new String[]{String.valueOf(id)}) 
-				== 1 ? true : false;
+
+		 int value = db.update(TABLE_NAME, cv, COL_ID+" = ?", new String[]{String.valueOf(id)});
+		if (value != 0)
+			up = true;
+		else
+			up = false;
+
+		return up;
+
 	}
 	
 	public boolean load(SQLiteDatabase db) {

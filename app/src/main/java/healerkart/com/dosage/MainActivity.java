@@ -13,7 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.Button;
 
 
-import healerkart.com.dosage.Alpha.AddDosage;
+//import healerkart.com.dosage.Alpha.AddDosage;
 import healerkart.com.dosage.Alpha.HomeFrag;
 import healerkart.com.dosage.Alpha.dosageFrag;
 import healerkart.com.dosage.Alpha.settingsFrag;

@@ -50,7 +50,7 @@ public class DosageDB extends Application {
 
     public static int getDateRange() {return Integer.parseInt(sp.getString(DATE_RANGE, "0"));}
 
-    public static String getDateFormat() {return sp.getString(DATE_FORMAT, DEFAULT_DATE_FORMAT);}
+//    public static String getDateFormat() {return sp.getString(DATE_FORMAT, DEFAULT_DATE_FORMAT);}
 
     public static boolean is24Hours() {
         return sp.getBoolean(TIME_FORMAT, true);
