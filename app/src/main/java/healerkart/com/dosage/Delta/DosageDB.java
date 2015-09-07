@@ -30,36 +30,27 @@ public class DosageDB extends Application {
     public void onCreate() {
         super.onCreate();
 
-        //PreferenceManager.setDefaultValues(this,R.xml.settings, false);
-        //sp = PreferenceManager.getDefaultSharedPreferences(this);
+        PreferenceManager.setDefaultValues(this,R.xml.settings, false);
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
 
         dbHelper = new DBHelper(this);
         db = dbHelper.getWritableDatabase();
 
         sp = PreferenceManager.getDefaultSharedPreferences(this);
-        if (sp.getInt("spl", 0) != SPL)
+        /*if (sp.getInt("spl", 0) != SPL)
         {
             PreferenceManager.setDefaultValues(this,R.xml.settings, false);
             sp.edit().putInt("spl", SPL).apply();
-        }
+        }*/
     }
 
     public static boolean showRemainingTime() {
         return "1".equals(sp.getString(TIME_OPTION, "0"));
     }
 
-    public static int getDateRange() {
-        String ranger = "one";
-        if(ranger!=null){
-            ranger = sp.getString(DATE_RANGE, "0");
-        }
+    public static int getDateRange() {return Integer.parseInt(sp.getString(DATE_RANGE, "0"));}
 
-        return Integer.parseInt(ranger);
-    }
-
-    public static String getDateFormat() {
-        return sp.getString(DATE_FORMAT, DEFAULT_DATE_FORMAT);
-    }
+    public static String getDateFormat() {return sp.getString(DATE_FORMAT, DEFAULT_DATE_FORMAT);}
 
     public static boolean is24Hours() {
         return sp.getBoolean(TIME_FORMAT, true);
@@ -69,8 +60,6 @@ public class DosageDB extends Application {
         return sp.getBoolean(VIBRATE_PREF, true);
     }
 
-    public static String getRingtone() {
-        return sp.getString(RINGTONE_PREF, android.provider.Settings.System.DEFAULT_NOTIFICATION_URI.toString());
-    }
+    public static String getRingtone() {return sp.getString(RINGTONE_PREF, android.provider.Settings.System.DEFAULT_NOTIFICATION_URI.toString());}
 
 }

@@ -143,7 +143,7 @@ public class Home extends ListActivity {
     protected void onResume() {
         super.onResume();
 
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(
+        /*SimpleCursorAdapter adapter = new SimpleCursorAdapter(
                 this,
                 R.layout.row,
                 createCursor(),
@@ -185,7 +185,7 @@ public class Home extends ListActivity {
         });
         setListAdapter(adapter);
 
-        rangeText.setText(getRangeStr());
+        rangeText.setText(getRangeStr());*/
     }
 
     private String move(int step) {
