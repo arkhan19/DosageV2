@@ -40,6 +40,8 @@ import healerkart.com.dosage.Delta.DBHelper;
 import healerkart.com.dosage.Delta.DosageDB;
 import healerkart.com.dosage.Delta.Util;
 import healerkart.com.dosage.DialogFrag.PickerDialogFrag;
+import healerkart.com.dosage.DialogFrag.PickerDialogFrag2;
+import healerkart.com.dosage.DialogFrag.PickerDialogFrag3;
 import healerkart.com.dosage.R;
 //Use Alarm Manager
 
@@ -171,23 +173,25 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
             @Override
             public void onClick(View v) {
                 PickerDialogFrag picker = new PickerDialogFrag();
-                picker.show(getFragmentManager(), "datePicker");
+                picker.show(getFragmentManager(), "From Date");
             }
         });
 
         todateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Toast.makeText(getActivity(), "To Date", Toast.LENGTH_SHORT).show();
+                PickerDialogFrag3 picker = new PickerDialogFrag3();
+                picker.show(getFragmentManager(), "To Date");
             }
+
         });
 
         attimeText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Toast.makeText(getActivity(), "At Time Date", Toast.LENGTH_SHORT).show();
+                PickerDialogFrag2 picker = new PickerDialogFrag2();
+                picker.show(getFragmentManager(), "At Time");
+                //Toast.makeText(getActivity(), "At Time", Toast.LENGTH_SHORT).show();
             }
         });
 

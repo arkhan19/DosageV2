@@ -17,14 +17,10 @@ import healerkart.com.dosage.Delta.DBHelper;
 import healerkart.com.dosage.R;
 
 
-public class PickerDialogFrag extends DialogFragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
+public class PickerDialogFrag3 extends DialogFragment implements DatePickerDialog.OnDateSetListener{
 
     TheListener listener;
 
-    @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-    }
 
     public interface TheListener{
         void returnDate(String date);
@@ -52,7 +48,7 @@ public class PickerDialogFrag extends DialogFragment implements DatePickerDialog
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         String formattedDate = sdf.format(c.getTime());
         String txt = DBHelper.getDateStr(year, month + 1, day);
-        ((TextView) getActivity().findViewById(R.id.fromdate_tv)).setText(txt);
+        ((TextView) getActivity().findViewById(R.id.todate_tv)).setText(txt);
 
 
         if (listener != null)
