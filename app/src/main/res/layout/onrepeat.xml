@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/fromdate_lb"
         android:clickable="true"
+        android:hint="Click Me"
         android:drawableRight="@drawable/ic_action_mdpi_ecg"
         android:drawablePadding="5dip"
         android:textColor="#000000" />

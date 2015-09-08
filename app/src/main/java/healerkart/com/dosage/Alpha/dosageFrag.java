@@ -172,8 +172,6 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
             public void onClick(View v) {
                 PickerDialogFrag picker = new PickerDialogFrag();
                 picker.show(getFragmentManager(), "datePicker");
-
-
             }
         });
 
@@ -286,6 +284,6 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
     @Override
     public void returnDate(String date) {
         Toast.makeText(getActivity(), "Specify time" + date, Toast.LENGTH_SHORT).show();
-        fromdateText.setText(date);
+        fromdatelb.setText(date);
     }
 }
