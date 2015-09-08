@@ -54,7 +54,7 @@ public class Alarm extends AbstractModel {
 		cv.put(COL_RULE, rule);
 		cv.put(COL_INTERVAL, interval);
 		cv.put(COL_SOUND, sound ? 1 : 0);
-		Log.e(TAG, "Error inserting " + now);
+		//Log.e(TAG, "Error inserting " + now);
 		return db.insert(TABLE_NAME, null, cv);
 	}
 	
