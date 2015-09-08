@@ -3,11 +3,12 @@ package healerkart.com.dosage.Delta;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.List;
 
 public class Alarm extends AbstractModel {
-	
+	private static final String TAG = "SQLiteDatabase";
 	public static final String TABLE_NAME = "alarm";
 	public static final String COL_ID = AbstractModel.COL_ID;
 	public static final String COL_CREATEDTIME = "created_time";
@@ -23,6 +24,8 @@ public class Alarm extends AbstractModel {
 	public static final String MED = "M";
 	public static final String LOW = "L";
 	boolean up;
+
+
 	
 	static String getSql() {
 		return Util.concat("CREATE TABLE ", TABLE_NAME, " (",
@@ -39,6 +42,8 @@ public class Alarm extends AbstractModel {
 	}
 	
 	long save(SQLiteDatabase db) {
+
+
 		ContentValues cv = new ContentValues();
 		long now = System.currentTimeMillis();
 		cv.put(COL_CREATEDTIME, now);
@@ -49,7 +54,7 @@ public class Alarm extends AbstractModel {
 		cv.put(COL_RULE, rule);
 		cv.put(COL_INTERVAL, interval);
 		cv.put(COL_SOUND, sound ? 1 : 0);
-		
+		Log.e(TAG, "Error inserting " + now);
 		return db.insert(TABLE_NAME, null, cv);
 	}
 	

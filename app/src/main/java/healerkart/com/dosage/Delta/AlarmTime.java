@@ -11,7 +11,7 @@ public class AlarmTime extends AbstractModel {
 	public static final String COL_ALARMID = "alarm_id";
 	public static final String COL_AT = "at";
 	boolean up;
-	
+
 	static String getSql() {
 		return Util.concat("CREATE TABLE ", TABLE_NAME, " (",
 				AbstractModel.getSql(),
@@ -24,7 +24,6 @@ public class AlarmTime extends AbstractModel {
 		ContentValues cv = new ContentValues();
 		cv.put(COL_ALARMID, alarmId);
 		cv.put(COL_AT, at);
-		
 		return db.insert(TABLE_NAME, null, cv);
 	}
 	

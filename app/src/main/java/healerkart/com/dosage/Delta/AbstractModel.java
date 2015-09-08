@@ -8,7 +8,7 @@ import android.util.Log;
 abstract class AbstractModel {
 	
 	static final String COL_ID = "_id";
-	
+
 	static String getSql() {
 		return Util.concat(COL_ID, " INTEGER PRIMARY KEY AUTOINCREMENT, ");
 	}
@@ -41,11 +41,21 @@ abstract class AbstractModel {
 	
 	public long persist(SQLiteDatabase db) {
 		if (id > 0)
+		{System.out.println("SEXY");
+				return 1;
 			//Log.d("CREATION","I > 0");
-			return update(db) ? id : 0;
+		/*{
+			if (update(db))
+				return id;
+			else
+				return 0;
+		}*/}
 		else
+		{//System.out.println("NOT SEXY");
 			//Log.d("CREATION", "I not 0");
 			return save(db);
+		}
+
 
 	}
 

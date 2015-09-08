@@ -10,8 +10,7 @@ import android.preference.PreferenceManager;
 import healerkart.com.dosage.R;
 
 public class DosageDB extends Application {
-
-//	private static final String TAG = "RemindMe";
+    
 
     public static DBHelper dbHelper;
     public static SQLiteDatabase db;
@@ -50,7 +49,7 @@ public class DosageDB extends Application {
 
     public static int getDateRange() {return Integer.parseInt(sp.getString(DATE_RANGE, "0"));}
 
-//    public static String getDateFormat() {return sp.getString(DATE_FORMAT, DEFAULT_DATE_FORMAT);}
+    public static String getDateFormat() {return sp.getString(DATE_FORMAT, DEFAULT_DATE_FORMAT);}
 
     public static boolean is24Hours() {
         return sp.getBoolean(TIME_FORMAT, true);

@@ -35,6 +35,7 @@ import healerkart.com.dosage.R;
 
 public class dosageFrag extends Fragment implements AdapterView.OnItemClickListener{
     private SQLiteDatabase db;
+
     Button tb;
     ViewSwitcher vs;
     EditText msgEdit;
@@ -64,6 +65,7 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.add, container, false);
         findview(view);
@@ -102,6 +104,7 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
                         //Toast.makeText(getActivity(), "Date : " + year + month + day, Toast.LENGTH_SHORT).show();
                         alarm.setFromDate(DBHelper.getDateStr(year, month, day));
                         alarmTime.setAt(DBHelper.getTimeStr(hour, minute));
+
 
                         alarmId = alarm.persist(db);
                         //alarmTime.setAlarmId(alarmId);
