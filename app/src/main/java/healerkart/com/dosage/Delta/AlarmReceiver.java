@@ -21,7 +21,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		
 		AlarmMsg alarmMsg = new AlarmMsg(alarmMsgId);
 		alarmMsg.setStatus(AlarmMsg.EXPIRED);
-		//alarmMsg.persist(DosageDB.db);
+		alarmMsg.persist(DosageDB.db);
 		
 		Alarm alarm = new Alarm(alarmId);
 		alarm.load(DosageDB.db);

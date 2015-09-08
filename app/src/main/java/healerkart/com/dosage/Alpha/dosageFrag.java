@@ -1,6 +1,13 @@
 package healerkart.com.dosage.Alpha;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -14,6 +21,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -22,18 +30,21 @@ import android.widget.ViewSwitcher;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import healerkart.com.dosage.Delta.Alarm;
 import healerkart.com.dosage.Delta.AlarmMsg;
 import healerkart.com.dosage.Delta.AlarmService;
 import healerkart.com.dosage.Delta.AlarmTime;
 import healerkart.com.dosage.Delta.DBHelper;
+import healerkart.com.dosage.Delta.DosageDB;
 import healerkart.com.dosage.Delta.Util;
+import healerkart.com.dosage.DialogFrag.PickerDialogFrag;
 import healerkart.com.dosage.R;
 //Use Alarm Manager
 
 
-public class dosageFrag extends Fragment implements AdapterView.OnItemClickListener{
+public class dosageFrag extends Fragment implements AdapterView.OnItemClickListener, PickerDialogFrag.TheListener{
     private SQLiteDatabase db;
 
     Button tb;
@@ -42,6 +53,9 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
     private TextView fromdateText;
     private TextView todateText;
     private TextView attimeText;
+    private TextView fromdatelb;
+    private TextView todatelb;
+    private TextView attimelb;
     private CheckBox soundCb;
     private DatePicker datePicker;
     private TimePicker timePicker;
@@ -54,6 +68,13 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
     private EditText daysEdit;
     private EditText monthsEdit;
     private EditText yearsEdit;
+
+    private RelativeLayout rl3;
+    private RelativeLayout rl4;
+
+    private static final int DIALOG_FROMDATE = 1;
+    private static final int DIALOG_TODATE = 2;
+    private static final int DIALOG_ATTIME = 3;
 
     static final SimpleDateFormat sdf = new SimpleDateFormat();
 
@@ -106,14 +127,14 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
                         alarmTime.setAt(DBHelper.getTimeStr(hour, minute));
 
 
-                        alarmId = alarm.persist(db);
+                        //alarmId = alarm.persist(db);
                         //alarmTime.setAlarmId(alarmId);
                         //alarmTime.persist(db);
                         Toast.makeText(getActivity(), "Dosage Added" + alarmId, Toast.LENGTH_SHORT).show();
                         break;
 
                     case 1: //repeating
-                        /*alarm.setFromDate(Util.toPersistentDate(fromdateText.getText().toString(), sdf));
+                        alarm.setFromDate(Util.toPersistentDate(fromdateText.getText().toString(), sdf));
                         alarm.setToDate(Util.toPersistentDate(todateText.getText().toString(), sdf));
                         switch(rg.getCheckedRadioButtonId()) {
                             case R.id.radio0: //rule
@@ -133,21 +154,60 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
 
                         alarmTime.setAt(Util.toPersistentTime(attimeText.getText().toString()));
                         alarmTime.setAlarmId(alarmId);
-                        alarmTime.persist(db);*/
+                        alarmTime.persist(db);
                         break;
                 }
-                /*Intent service = new Intent(getActivity(), AlarmService.class);
+                Intent service = new Intent(getActivity(), AlarmService.class);
                 service.putExtra(AlarmMsg.COL_ALARMID, String.valueOf(alarmId));
                 service.setAction(AlarmService.POPULATE);
                 getActivity().startService(service);
-                getActivity().finish();*/
+                getActivity().finish();
 
 
             }
         });
 
+        fromdateText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PickerDialogFrag picker = new PickerDialogFrag();
+                picker.show(getFragmentManager(), "datePicker");
 
 
+            }
+        });
+
+        todateText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getActivity(), "To Date", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        attimeText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getActivity(), "At Time Date", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.radio0:
+                        rl3.setVisibility(View.VISIBLE);
+                        rl4.setVisibility(View.GONE);
+                        break;
+                    case R.id.radio1:
+                        rl4.setVisibility(View.VISIBLE);
+                        rl3.setVisibility(View.GONE);
+                        break;
+                }
+            }
+        });
 
         return view;
 
@@ -160,6 +220,11 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
 
     }
 
+
+
+
+
+
     public void findview(View v)
     {
         tb = (Button)v.findViewById(R.id.toggleButton1);
@@ -168,6 +233,9 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
         fromdateText = (TextView)v.findViewById(R.id.fromdate_tv);
         todateText = (TextView)v.findViewById(R.id.todate_tv);
         attimeText = (TextView)v.findViewById(R.id.attime_tv);
+        fromdatelb = (TextView)v.findViewById(R.id.fromdate_lb);
+        todatelb = (TextView)v.findViewById(R.id.todate_lb);
+        attimelb = (TextView)v.findViewById(R.id.attime_lb);
         soundCb = (CheckBox) v.findViewById(R.id.sound_cb);
         datePicker = (DatePicker) v.findViewById(R.id.datePicker);
         timePicker = (TimePicker) v.findViewById(R.id.timePicker);
@@ -180,6 +248,8 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
         daysEdit = (EditText) v.findViewById(R.id.days_et);
         monthsEdit = (EditText) v.findViewById(R.id.months_et);
         yearsEdit = (EditText) v.findViewById(R.id.years_et);
+        rl3 = (RelativeLayout) v.findViewById(R.id.relativeLayout3);
+        rl4 = (RelativeLayout) v.findViewById(R.id.relativeLayout4);
 
         //final EditText msgEdit = (EditText) getActivity().findViewById(R.id.msg_et);
     }
@@ -211,5 +281,11 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
             }
         }
         return true;
+    }
+
+    @Override
+    public void returnDate(String date) {
+        Toast.makeText(getActivity(), "Specify time" + date, Toast.LENGTH_SHORT).show();
+        fromdateText.setText(date);
     }
 }

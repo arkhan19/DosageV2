@@ -30,14 +30,14 @@ public class Alarm extends AbstractModel {
 	static String getSql() {
 		return Util.concat("CREATE TABLE ", TABLE_NAME, " (",
 				AbstractModel.getSql(),
-				COL_CREATEDTIME, " INTEGER, ",
-				COL_MODIFIEDTIME, " INTEGER, ",
-				COL_NAME, " TEXT, ",
-				COL_FROMDATE, " DATE, ",
-				COL_TODATE, " DATE, ",
-				COL_RULE, " TEXT, ",				
-				COL_INTERVAL, " TEXT, ",
-				COL_SOUND, " INTEGER",
+				COL_CREATEDTIME, " INTEGER not null ON CONFLICT FAIL, ",
+				COL_MODIFIEDTIME, " INTEGER not null ON CONFLICT FAIL, ",
+				COL_NAME, " TEXT not null ON CONFLICT FAIL, ",
+				COL_FROMDATE, " DATE not null ON CONFLICT FAIL, ",
+				COL_TODATE, " DATE not null ON CONFLICT FAIL, ",
+				COL_RULE, " TEXT not null ON CONFLICT FAIL, ",
+				COL_INTERVAL, " TEXT not null ON CONFLICT FAIL, ",
+				COL_SOUND, " INTEGER not null ON CONFLICT FAIL ",
 				");");
 	}
 	
@@ -46,16 +46,23 @@ public class Alarm extends AbstractModel {
 
 		ContentValues cv = new ContentValues();
 		long now = System.currentTimeMillis();
+
 		cv.put(COL_CREATEDTIME, now);
+		if (fromDate != null)
 		cv.put(COL_MODIFIEDTIME, now);
 		cv.put(COL_NAME, name==null ? "" : name);
+		if (fromDate != null)
 		cv.put(COL_FROMDATE, fromDate);
+		if (toDate != null)
 		cv.put(COL_TODATE, toDate);
+		if (rule != null)
 		cv.put(COL_RULE, rule);
+		if (interval != null)
 		cv.put(COL_INTERVAL, interval);
-		cv.put(COL_SOUND, sound ? 1 : 0);
+		//if (sound != null)
+		//cv.put(COL_SOUND, sound ? 1 : 0);
 		//Log.e(TAG, "Error inserting " + now);
-		return db.insert(TABLE_NAME, null, cv);
+		return db.insert(TABLE_NAME,null, cv);
 	}
 	
 	boolean update(SQLiteDatabase db) {

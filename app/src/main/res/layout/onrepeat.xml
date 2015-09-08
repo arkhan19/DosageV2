@@ -8,10 +8,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:clickable="true"
-        android:onClick="onClick"
+        android:clickable="false"
         android:text="From Date:  "
-        android:textColor="@color/accent" />
+        android:textColor="#000000" />
     <TextView
         android:id="@+id/fromdate_tv"
         android:layout_width="wrap_content"
@@ -20,7 +19,6 @@
         android:clickable="true"
         android:drawableRight="@drawable/ic_action_mdpi_ecg"
         android:drawablePadding="5dip"
-        android:onClick="onClick"
         android:textColor="#000000" />
 
     <TextView
@@ -29,10 +27,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/fromdate_lb"
         android:layout_marginBottom="20dp"
-        android:clickable="true"
-        android:onClick="onClick"
+        android:clickable="false"
         android:text="To Date:  "
-        android:textColor="@color/accent" />
+        android:textColor="#000000" />
     <TextView
         android:id="@+id/todate_tv"
         android:layout_width="wrap_content"
@@ -42,7 +39,6 @@
         android:clickable="true"
         android:drawableRight="@drawable/ic_action_mdpi_ecg"
         android:drawablePadding="5dip"
-        android:onClick="onClick"
         android:textColor="#000000" />
 
     <TextView
@@ -51,10 +47,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/todate_lb"
         android:layout_marginBottom="20dp"
-        android:clickable="true"
-        android:onClick="onClick"
+        android:clickable="false"
         android:text="At Time:  "
-        android:textColor="@color/accent" />
+        android:textColor="#000000" />
     <TextView
         android:id="@+id/attime_tv"
         android:layout_width="wrap_content"
@@ -114,7 +109,7 @@
             android:layout_alignBaseline="@id/spinner2"
             android:layout_toRightOf="@id/spinner2"
             android:text="of"
-            android:textColor="#ffffff" />
+            android:textColor="#000000" />
         <Spinner
             android:id="@+id/spinner3"
             android:layout_width="wrap_content"
@@ -136,35 +131,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="min(s)    "
-            android:textColor="#ffffff" />
+            android:textColor="#000000" />
         <TextView
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/textView8"
             android:text="hour(s)   "
-            android:textColor="#ffffff" />
+            android:textColor="#000000" />
         <TextView
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/textView9"
             android:text="day(s)    "
-            android:textColor="#ffffff" />
+            android:textColor="#000000" />
         <TextView
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/textView10"
             android:text="month(s)  "
-            android:textColor="#ffffff" />
+            android:textColor="#000000" />
         <TextView
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/textView11"
             android:text="year(s)"
-            android:textColor="#ffffff" />
+            android:textColor="#000000" />
 
         <EditText
             android:id="@+id/mins_et"
