@@ -17,9 +17,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Alpha.AddDosage"
-            android:label="New Dosage"
-            android:windowSoftInputMode="stateHidden"/>
+
         <activity android:name=".Alpha.Home"
             android:label="Home" />
         <activity android:name=".Alpha.Settings"
