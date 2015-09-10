@@ -2,8 +2,14 @@ package healerkart.com.dosage.Alpha;
 
 import android.app.ListFragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,20 +22,8 @@ import healerkart.com.dosage.R;
  * Created by f3n1Xx on 21/08/15.
  */
 
-public class settingsFrag extends PreferenceFragment {
-    public settingsFrag()
-    {}
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.settings);
-    }
-}
 
 
-/*
 //Fragment
 public class settingsFrag extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -81,4 +75,4 @@ public class settingsFrag extends PreferenceFragment implements SharedPreference
     }
 
 
-}*/
+}

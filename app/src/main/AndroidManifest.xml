@@ -33,10 +33,6 @@
 
         <service android:name="healerkart.com.dosage.Delta.AlarmService"></service>
 
-
-
-
-
     </application>
 
 </manifest>

@@ -38,6 +38,7 @@
         android:layout_below="@id/fromdate_lb"
         android:layout_toRightOf="@id/todate_lb"
         android:clickable="true"
+        android:hint="Click Me"
         android:drawableRight="@drawable/ic_action_mdpi_ecg"
         android:drawablePadding="5dip"
         android:textColor="#000000" />
@@ -58,6 +59,7 @@
         android:layout_below="@id/todate_lb"
         android:layout_toRightOf="@id/attime_lb"
         android:clickable="true"
+        android:hint="Click Me"
         android:drawableRight="@drawable/ic_action_mdpi_ecg"
         android:drawablePadding="5dip"
         android:onClick="onClick"

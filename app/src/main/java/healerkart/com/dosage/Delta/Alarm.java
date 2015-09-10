@@ -42,25 +42,25 @@ public class Alarm extends AbstractModel {
 	}
 	
 	long save(SQLiteDatabase db) {
-
+		
 
 		ContentValues cv = new ContentValues();
 		long now = System.currentTimeMillis();
-
 		cv.put(COL_CREATEDTIME, now);
-		if (fromDate != null)
 		cv.put(COL_MODIFIEDTIME, now);
+		//cv.putNull(COL_MODIFIEDTIME);
 		cv.put(COL_NAME, name==null ? "" : name);
-		if (fromDate != null)
-		cv.put(COL_FROMDATE, fromDate);
-		if (toDate != null)
-		cv.put(COL_TODATE, toDate);
-		if (rule != null)
-		cv.put(COL_RULE, rule);
-		if (interval != null)
-		cv.put(COL_INTERVAL, interval);
+		//if (fromDate != null)
+		cv.put(COL_FROMDATE, fromDate==null ? "" :fromDate);
+		//if (toDate != null)
+		cv.put(COL_TODATE, toDate==null ? "" :toDate);
+		//if (rule != null)
+		cv.put(COL_RULE, rule==null ? "" :rule);
+		//if (interval != null)
+		cv.put(COL_INTERVAL, interval==null ? "" :interval);
+		cv.put(COL_SOUND, sound ? 1 : 0);
 		//if (sound != null)
-		//cv.put(COL_SOUND, sound ? 1 : 0);
+
 		//Log.e(TAG, "Error inserting " + now);
 		return db.insert(TABLE_NAME,null, cv);
 	}

@@ -47,7 +47,7 @@ import healerkart.com.dosage.R;
 
 
 public class dosageFrag extends Fragment implements AdapterView.OnItemClickListener, PickerDialogFrag.TheListener{
-    private SQLiteDatabase db;
+    public SQLiteDatabase db;
 
     Button tb;
     ViewSwitcher vs;
@@ -82,12 +82,13 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
 
     public dosageFrag()
     {
-
+        db = DosageDB.db;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.add, container, false);
@@ -107,32 +108,33 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
         {
             @Override
             public void onClick(View v) {
+
                 if (!validate()) return;
                 Alarm alarm = new Alarm();
                 alarm.setName(msgEdit.getText().toString());
                 alarm.setSound(soundCb.isChecked());
                 AlarmTime alarmTime = new AlarmTime();
                 long alarmId = 0;
-                int x = vs.getDisplayedChild();
+                //int x = vs.getDisplayedChild();
 
 
                 switch(vs.getDisplayedChild()) {
                     case 0: //one time
-
                         int year = datePicker.getYear();
                         int month = datePicker.getMonth() + 1;
                         int day = datePicker.getDayOfMonth();
                         int hour = timePicker.getCurrentHour();
                         int minute = timePicker.getCurrentMinute();
+
                         //Toast.makeText(getActivity(), "Date : " + year + month + day, Toast.LENGTH_SHORT).show();
                         alarm.setFromDate(DBHelper.getDateStr(year, month, day));
                         alarmTime.setAt(DBHelper.getTimeStr(hour, minute));
 
 
-                        //alarmId = alarm.persist(db);
-                        //alarmTime.setAlarmId(alarmId);
-                        //alarmTime.persist(db);
-                        Toast.makeText(getActivity(), "Dosage Added" + alarmId, Toast.LENGTH_SHORT).show();
+                        alarmId = alarm.persist(db);
+                        alarmTime.setAlarmId(alarmId);
+                        alarmTime.persist(db);
+                        Toast.makeText(getActivity(), "Single Dosage Added", Toast.LENGTH_SHORT).show();
                         break;
 
                     case 1: //repeating
@@ -157,6 +159,7 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
                         alarmTime.setAt(Util.toPersistentTime(attimeText.getText().toString()));
                         alarmTime.setAlarmId(alarmId);
                         alarmTime.persist(db);
+                        Toast.makeText(getActivity(), "A Repeating Dosage Has been Added", Toast.LENGTH_SHORT).show();
                         break;
                 }
                 Intent service = new Intent(getActivity(), AlarmService.class);
