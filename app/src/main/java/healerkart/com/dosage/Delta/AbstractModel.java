@@ -7,8 +7,6 @@ import healerkart.com.dosage.Delta.Util;
 import android.util.Log;
 
 abstract class AbstractModel {
-
-	
 	static final String COL_ID = "_id";
 
 	static String getSql() {
@@ -43,18 +41,12 @@ abstract class AbstractModel {
 	
 	public long persist(SQLiteDatabase db) {
 		if (id > 0)
-		{
-			if (update(db))
-				return id;
-			else
-				return 0;
-		}
+			return update(db) ? id : 0;
 		else
-		{
-			return (save(db));
-		}
-
-
+			return save(db);
 	}
+
+
+
 
 }

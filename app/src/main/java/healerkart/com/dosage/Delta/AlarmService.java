@@ -9,8 +9,6 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 
 
-
-
 public class AlarmService extends IntentService {
 	
 	private static final String TAG = "AlarmService";

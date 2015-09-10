@@ -7,9 +7,12 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
+
+import healerkart.com.dosage.Delta.DBHelper;
 import healerkart.com.dosage.R;
 
-public class DosageDB extends Application {
+
+public class DosageDB extends Application{
     
 
     public static DBHelper dbHelper;
@@ -22,25 +25,24 @@ public class DosageDB extends Application {
     public static final String TIME_FORMAT = "time_format";
     public static final String VIBRATE_PREF = "vibrate_pref";
     public static final String RINGTONE_PREF = "ringtone_pref";
-
     public static final String DEFAULT_DATE_FORMAT = "yyyy-M-d";
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        PreferenceManager.setDefaultValues(this,R.xml.settings, false);
-        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        //PreferenceManager.setDefaultValues(this,R.xml.settings, false);
+        //sp = PreferenceManager.getDefaultSharedPreferences(this);
 
-        dbHelper = new DBHelper(this);
+        dbHelper = new DBHelper(getApplicationContext());
         db = dbHelper.getWritableDatabase();
 
         sp = PreferenceManager.getDefaultSharedPreferences(this);
-        /*if (sp.getInt("spl", 0) != SPL)
+        if (sp.getInt("spl", 0) != SPL)
         {
-            PreferenceManager.setDefaultValues(this,R.xml.settings, false);
+            PreferenceManager.setDefaultValues(this, R.xml.settings, false);
             sp.edit().putInt("spl", SPL).apply();
-        }*/
+        }
     }
 
     public static boolean showRemainingTime() {

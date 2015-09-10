@@ -15,7 +15,7 @@ public class DBHelper extends SQLiteOpenHelper {
 //	private static final String TAG = "DbHelper";
 
     public static final String DB_NAME = "Dosage.db";
-    public static final int DB_VERSION = 2;
+    public static final int DB_VERSION = 1;
 
     public static final SimpleDateFormat sdf = new SimpleDateFormat(DosageDB.DEFAULT_DATE_FORMAT);
 
@@ -35,7 +35,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + Alarm.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + AlarmTime.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + AlarmMsg.TABLE_NAME);
-
         onCreate(db);
     }
 

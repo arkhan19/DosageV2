@@ -1,20 +1,15 @@
 package healerkart.com.dosage.DialogFrag;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
-import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
 import healerkart.com.dosage.Delta.DBHelper;
-import healerkart.com.dosage.Delta.DosageDB;
 import healerkart.com.dosage.R;
 
 

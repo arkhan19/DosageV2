@@ -1,19 +1,13 @@
 package healerkart.com.dosage.Alpha;
 
-import android.app.ListFragment;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import healerkart.com.dosage.Delta.DosageDB;
 import healerkart.com.dosage.R;

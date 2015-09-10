@@ -1,13 +1,6 @@
 package healerkart.com.dosage.Alpha;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -30,7 +23,6 @@ import android.widget.ViewSwitcher;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import healerkart.com.dosage.Delta.Alarm;
 import healerkart.com.dosage.Delta.AlarmMsg;
@@ -47,7 +39,8 @@ import healerkart.com.dosage.R;
 
 
 public class dosageFrag extends Fragment implements AdapterView.OnItemClickListener, PickerDialogFrag.TheListener{
-    public SQLiteDatabase db;
+    public static SQLiteDatabase db;
+
 
     Button tb;
     ViewSwitcher vs;
@@ -81,8 +74,14 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
     static final SimpleDateFormat sdf = new SimpleDateFormat();
 
     public dosageFrag()
-    {
-        db = DosageDB.db;
+    {   //System.out.println("I am in dosageFrag");
+        //db= DosageDB.db;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        db= DosageDB.db;
     }
 
     @Override
@@ -93,6 +92,7 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.add, container, false);
         findview(view);
+
         //For Once and Repeat
         tb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +131,7 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
                         alarmTime.setAt(DBHelper.getTimeStr(hour, minute));
 
 
-                        alarmId = alarm.persist(db);
+                        alarmId = alarm.persist(DosageDB.db);
                         alarmTime.setAlarmId(alarmId);
                         alarmTime.persist(db);
                         Toast.makeText(getActivity(), "Single Dosage Added", Toast.LENGTH_SHORT).show();
