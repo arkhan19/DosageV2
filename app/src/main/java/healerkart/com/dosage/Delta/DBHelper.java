@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -17,7 +18,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "Dosage.db";
     public static final int DB_VERSION = 1;
 
-    public static final SimpleDateFormat sdf = new SimpleDateFormat(DosageDB.DEFAULT_DATE_FORMAT);
+    public static final SimpleDateFormat sdf = new SimpleDateFormat(DosageDB.DEFAULT_DATE_FORMAT, Locale.US);
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);

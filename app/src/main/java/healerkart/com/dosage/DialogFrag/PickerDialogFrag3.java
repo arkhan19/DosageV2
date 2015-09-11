@@ -9,17 +9,20 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 import healerkart.com.dosage.Delta.DBHelper;
+import healerkart.com.dosage.Delta.DosageDB;
 import healerkart.com.dosage.R;
 
 
 public class PickerDialogFrag3 extends DialogFragment implements DatePickerDialog.OnDateSetListener{
 
     TheListener listener;
+    //private static final SimpleDateFormat sdf = new SimpleDateFormat(DosageDB.DEFAULT_DATE_FORMAT, Locale.US);
 
 
     public interface TheListener{
@@ -42,12 +45,20 @@ public class PickerDialogFrag3 extends DialogFragment implements DatePickerDialo
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        Calendar c = Calendar.getInstance();
-        c.set(year, month, day);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-        String formattedDate = sdf.format(c.getTime());
-        String txt = DBHelper.getDateStr(year, month + 1, day);
-        ((TextView) getActivity().findViewById(R.id.todate_tv)).setText(txt);
+        //Calendar c = Calendar.getInstance();
+        //c.set(year, month, day);
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        //String formattedDate = sdf.format(c.getTime());
+        //String txt = DBHelper.getDateStr(year, month + 1, day);
+
+
+
+        String formattedDate = DBHelper.getDateStr(year, month + 1, day);
+        try {
+            ((TextView) getActivity().findViewById(R.id.todate_tv)).setText(DBHelper.sdf.format(DBHelper.sdf.parse(formattedDate)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
 
         if (listener != null)
