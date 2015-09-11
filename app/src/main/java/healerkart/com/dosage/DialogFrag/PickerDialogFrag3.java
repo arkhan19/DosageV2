@@ -44,7 +44,6 @@ public class PickerDialogFrag3 extends DialogFragment implements DatePickerDialo
     public void onDateSet(DatePicker view, int year, int month, int day) {
         Calendar c = Calendar.getInstance();
         c.set(year, month, day);
-
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         String formattedDate = sdf.format(c.getTime());
         String txt = DBHelper.getDateStr(year, month + 1, day);

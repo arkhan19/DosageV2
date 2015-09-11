@@ -10,6 +10,7 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 
 import healerkart.com.dosage.Delta.DBHelper;
+import healerkart.com.dosage.Delta.Util;
 import healerkart.com.dosage.R;
 
 
@@ -19,10 +20,11 @@ public class PickerDialogFrag2 extends DialogFragment implements TimePickerDialo
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        Calendar c = Calendar.getInstance();
+        /*Calendar c = Calendar.getInstance();
         c.set(hourOfDay, minute);
-
         String txt = DBHelper.getTimeStr(hourOfDay, minute);
+        ((TextView) getActivity().findViewById(R.id.attime_tv)).setText(txt);*/
+        String txt = Util.getActualTime(hourOfDay, minute);
         ((TextView) getActivity().findViewById(R.id.attime_tv)).setText(txt);
 
 
