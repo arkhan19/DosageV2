@@ -1,10 +1,11 @@
 /*
 package healerkart.com.dosage.Alpha;
 
-*/
-/**
+import android.app.ListActivity;
+
+*
  * Created by f3n1Xx on 05/09/15.
- *//*
+
 
 
 import java.util.Calendar;
@@ -45,7 +46,7 @@ import healerkart.com.dosage.Delta.Util;
 import healerkart.com.dosage.R;
 
 
-public class Home extends ListActivity{
+public class HomeActivity extends ListActivity {
 
 //	private static final String TAG = "MainActivity";
 
@@ -71,9 +72,8 @@ public class Home extends ListActivity{
         setContentView(R.layout.main);
         findViews();
         db = DosageDB.db;
-        */
-/*font = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Semibold.ttf");
-        headingText.setTypeface(font);*//*
+font = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Semibold.ttf");
+        headingText.setTypeface(font);
 
         monthArr = getResources().getStringArray(R.array.spinner3_arr);
 
@@ -215,13 +215,12 @@ public class Home extends ListActivity{
 
     public void onClick(View v) {
         switch (v.getId()) {
-            */
-/*case R.id.imageButton1:
+case R.id.imageButton1:
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
             case R.id.imageButton2:
                 startActivity(new Intent(this, AddAlarmActivity.class));
-                break;*//*
+                break;
 
             case R.id.imageButton3:
                 move(-1);
@@ -233,10 +232,9 @@ public class Home extends ListActivity{
                 rangeText.setText(getRangeStr());
                 ((SimpleCursorAdapter)getListAdapter()).changeCursor(createCursor());
                 break;
-*/
-/*		case R.id.toggleButton1:
+		case R.id.toggleButton1:
 			vs.showNext();
-			break;*//*
+			break;
 
         }
     }
@@ -309,8 +307,7 @@ public class Home extends ListActivity{
         openContextMenu(v);
     }
 
-    */
-/*@Override
+@Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
             case R.id.menu_edit:
@@ -346,7 +343,7 @@ public class Home extends ListActivity{
                         .create();
         }
         return super.onCreateDialog(id);
-    }*//*
+    }
 
 
     @Override
@@ -407,4 +404,5 @@ public class Home extends ListActivity{
             disclaimer.dismiss();
         super.onDestroy();
     }
-}*/
+}
+*/
