@@ -166,7 +166,7 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
                 service.putExtra(AlarmMsg.COL_ALARMID, String.valueOf(alarmId));
                 service.setAction(AlarmService.POPULATE);
                 getActivity().startService(service);
-                getActivity().finish();
+                //getActivity().finish();
 
 
             }
