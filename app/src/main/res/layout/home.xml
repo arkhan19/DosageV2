@@ -8,6 +8,53 @@
     >
 
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton"
+            android:src="@drawable/ic_action_previous_item"
+            android:elevation="10dp"
+            android:layout_gravity="left"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="12sp"
+            android:id="@+id/range_tv"
+            android:textColor="#343234" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton2"
+            android:src="@drawable/ic_action_next_item"
+            android:elevation="10dp"
+            android:layout_gravity="center_vertical|right"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/list_view"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:padding="5dip"
+        android:orientation="vertical" >
+
+        <ListView android:id="@android:id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="@drawable/line"
+            android:dividerHeight="3dip"
+            android:listSelector="@android:color/transparent"
+            android:cacheColorHint="#00000000"
+            android:drawSelectorOnTop="false" />
 
         <TextView android:id="@android:id/empty"
             android:layout_width="fill_parent"
@@ -16,6 +63,7 @@
             android:textColor="#777777"
             android:text="Add Dosage to Show Here" />
 
+    </LinearLayout>
 
 
 </LinearLayout>
