@@ -1,8 +1,11 @@
 package healerkart.com.dosage.Alpha;
 //Learn another method that StartManagingCursor to manage Cursor to keep it off the UI thread. Else just use it and give the final version by sunday.
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.ListFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -22,6 +25,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -278,17 +282,18 @@ public class HomeFrag extends ListFragment {
         switch (item.getItemId()) {
             case R.id.menu_edit:
                 alarmMsg.setId(info.id);
-                alarmMsg.load(db);
+                alarmMsg.load(DosageDB.db);
                 alarm.reset();
                 alarm.setId(alarmMsg.getAlarmId());
-                alarm.load(db);
-                OptionFragment opt = new OptionFragment();
+                alarm.load(DosageDB.db);
+               OptionFragment opt = new OptionFragment();
                 opt.show(getFragmentManager(), "Option");
 
-                //SimpleCursorAdapter adapter = (SimpleCursorAdapter) getListAdapter();
-                //adapter.getCursor().requery();
-                //adapter.notifyDataSetChanged();
-                break;
+
+
+
+
+            break;
 
             case R.id.menu_delete:
                 DosageDB.dbHelper.cancelNotification(db, info.id, false);
@@ -322,6 +327,9 @@ public class HomeFrag extends ListFragment {
         return true;
     }
 
+    //For Edit
+
 
 
 }
+

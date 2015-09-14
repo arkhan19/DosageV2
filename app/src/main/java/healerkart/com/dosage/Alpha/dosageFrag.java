@@ -162,7 +162,7 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
                 service.putExtra(AlarmMsg.COL_ALARMID, String.valueOf(alarmId));
                 service.setAction(AlarmService.POPULATE);
                 getActivity().startService(service);
-                Toast.makeText(getActivity(), "We will Remind You About Your Dosage. Thank You." + AlarmMsg.COL_DATETIME, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "We will Remind You About Your Dosage. Thank You.", Toast.LENGTH_SHORT).show();
                 //getActivity().finish();
 
 

@@ -22,21 +22,22 @@ import healerkart.com.dosage.Alpha.HomeFrag;
 import healerkart.com.dosage.Delta.Alarm;
 import healerkart.com.dosage.Delta.AlarmMsg;
 import healerkart.com.dosage.Delta.AlarmService;
+import healerkart.com.dosage.Delta.DBHelper;
 import healerkart.com.dosage.Delta.DosageDB;
 import healerkart.com.dosage.R;
 
 
 public class OptionFragment extends DialogFragment
     {   private Alarm alarm = new Alarm();
-        private AlarmMsg alarmMsg = new AlarmMsg();
+        //private AlarmMsg alarmMsg = new AlarmMsg();
         private SQLiteDatabase db;
+        //private static final String TAG = "Option Dialog";
+
 
         @Override
         public Dialog onCreateDialog (Bundle savedInstanceState)
         {
-
-
-
+            db = DosageDB.db;
             return new AlertDialog.Builder(getActivity())
                     .setTitle("Edit Dosage")
                     .setView(getActivity().getLayoutInflater().inflate(R.layout.edit, null))
@@ -51,6 +52,7 @@ public class OptionFragment extends DialogFragment
                             if (!TextUtils.isEmpty(msgEdit.getText())) {
                                 alarm.setName(msgEdit.getText().toString());
                                 alarm.persist(db);
+
                                 Toast.makeText(getActivity(), "Dosage Edited", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(getActivity(), "Enter a message", Toast.LENGTH_SHORT).show();
@@ -67,4 +69,5 @@ public class OptionFragment extends DialogFragment
                     .create();
 
         }
+
     }
