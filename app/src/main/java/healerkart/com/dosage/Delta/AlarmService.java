@@ -55,6 +55,7 @@ public class AlarmService extends IntentService {
 	/**
 	 * @param action
 	 * @param args {alarmId, alarmMsgId, startTime, endTime}
+	 *             Used to Calculate the Time and Remainng Time. Alarm Manager is being Used.
 	 */	
 	private void execute(String action, String... args) {		
 		Intent i;

@@ -34,6 +34,8 @@ import healerkart.com.dosage.Delta.Util;
 import healerkart.com.dosage.DialogFrag.PickerDialogFrag;
 import healerkart.com.dosage.DialogFrag.PickerDialogFrag2;
 import healerkart.com.dosage.DialogFrag.PickerDialogFrag3;
+import healerkart.com.dosage.DialogFrag.PickerDialogFragdate;
+import healerkart.com.dosage.DialogFrag.PickerDialogFragtime;
 import healerkart.com.dosage.R;
 //Use Alarm Manager
 
@@ -52,8 +54,8 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
     private TextView todatelb;
     private TextView attimelb;
     private CheckBox soundCb;
-    private DatePicker datePicker;
-    private TimePicker timePicker;
+    private TextView datePicker;
+    private TextView timePicker;
     private Spinner spinner1;
     private Spinner spinner2;
     private Spinner spinner3;
@@ -101,9 +103,11 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
                 vs.showNext();
             }
         });
-        //Add Button
-        final Button add = (Button) view.findViewById(R.id.button);
 
+
+
+        //Add Button and Click Listener
+        final Button add = (Button) view.findViewById(R.id.button);
         add.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -115,26 +119,18 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
                 alarm.setSound(soundCb.isChecked());
                 AlarmTime alarmTime = new AlarmTime();
                 long alarmId = 0;
-                //int x = vs.getDisplayedChild();
+                int x = vs.getDisplayedChild();
 
 
-                switch(vs.getDisplayedChild()) {
+                switch(x) {
                     case 0: //one time
-                        int year = datePicker.getYear();
-                        int month = datePicker.getMonth() + 1;
-                        int day = datePicker.getDayOfMonth();
-                        int hour = timePicker.getCurrentHour();
-                        int minute = timePicker.getCurrentMinute();
-
-                        //Toast.makeText(getActivity(), "Date : " + year + month + day, Toast.LENGTH_SHORT).show();
-                        alarm.setFromDate(DBHelper.getDateStr(year, month, day));
-                        alarmTime.setAt(DBHelper.getTimeStr(hour, minute));
-
-
-                        alarmId = alarm.persist(DosageDB.db);
+                        //Doesn't Use Set Rule, and Set Interval Method.
+                        alarm.setFromDate(Util.toPersistentDate(datePicker.getText().toString(), sdf));
+                        alarmId = alarm.persist(db);
+                        alarmTime.setAt(Util.toPersistentTime(timePicker.getText().toString()));
                         alarmTime.setAlarmId(alarmId);
                         alarmTime.persist(db);
-                        Toast.makeText(getActivity(), "Single Dosage Added", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Added a One Time Dosage.", Toast.LENGTH_SHORT).show();
                         break;
 
                     case 1: //repeating
@@ -155,17 +151,18 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
                                 break;
                         }
                         alarmId = alarm.persist(db);
-
                         alarmTime.setAt(Util.toPersistentTime(attimeText.getText().toString()));
                         alarmTime.setAlarmId(alarmId);
                         alarmTime.persist(db);
-                        Toast.makeText(getActivity(), "A Repeating Dosage Has been Added", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Added a Regular Dosage", Toast.LENGTH_SHORT).show();
                         break;
                 }
+
                 Intent service = new Intent(getActivity(), AlarmService.class);
                 service.putExtra(AlarmMsg.COL_ALARMID, String.valueOf(alarmId));
                 service.setAction(AlarmService.POPULATE);
                 getActivity().startService(service);
+                Toast.makeText(getActivity(), "We will Remind You About Your Dosage. Thank You." + AlarmMsg.COL_DATETIME, Toast.LENGTH_SHORT).show();
                 //getActivity().finish();
 
 
@@ -214,6 +211,22 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
             }
         });
 
+        datePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PickerDialogFragdate picker = new PickerDialogFragdate();
+                picker.show(getFragmentManager(), "From Date");
+            }
+        });
+
+        timePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PickerDialogFragtime picker = new PickerDialogFragtime();
+                picker.show(getFragmentManager(), "At Time");
+            }
+        });
+
         return view;
 
 
@@ -242,8 +255,12 @@ public class dosageFrag extends Fragment implements AdapterView.OnItemClickListe
         todatelb = (TextView)v.findViewById(R.id.todate_lb);
         attimelb = (TextView)v.findViewById(R.id.attime_lb);
         soundCb = (CheckBox) v.findViewById(R.id.sound_cb);
-        datePicker = (DatePicker) v.findViewById(R.id.datePicker);
-        timePicker = (TimePicker) v.findViewById(R.id.timePicker);
+        //datePicker = (DatePicker) v.findViewById(R.id.datePicker);
+        //timePicker = (TimePicker) v.findViewById(R.id.timePicker);
+        datePicker = (TextView)v.findViewById(R.id.date_view);
+        timePicker = (TextView)v.findViewById(R.id.time_view);
+        //dateview = (TextView)v.findViewById(R.id.date_text);
+        //timeview = (TextView)v.findViewById(R.id.time_text);
         rg = (RadioGroup) v.findViewById(R.id.radioGroup);
         spinner1 = (Spinner)v.findViewById(R.id.spinner1);
         spinner2 = (Spinner) v.findViewById(R.id.spinner2);

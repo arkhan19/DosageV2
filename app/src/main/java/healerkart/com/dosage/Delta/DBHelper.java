@@ -194,11 +194,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 new String[]{startTime, endTime});
     }
 
-    public static final String getDateStr(int year, int month, int date) {
+    public final static String getDateStr(int year, int month, int date) {
         return Util.concat(year, "-", month, "-", date);
     }
 
-    public static final String getTimeStr(int hour, int minute) {
+    public final static String getTimeStr(int hour, int minute) {
         return Util.concat(hour, ":", minute>9 ? "":"0", minute);
     }
 

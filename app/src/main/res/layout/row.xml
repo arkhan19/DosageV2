@@ -4,6 +4,13 @@
     android:layout_height="fill_parent"
     android:padding="10dip" >
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/listcross"
+        android:paddingEnd="10dp" />
+
     <TextView
         android:id="@+id/month_tv"
         android:layout_width="wrap_content"
@@ -37,20 +44,22 @@
         android:id="@+id/msg_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:layout_toLeftOf="@id/date_tv"
         android:textColor="#587498"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_alignTop="@+id/date_tv"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView" />
     
     <TextView
         android:id="@+id/time_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/msg_tv"
         android:paddingTop="5sp"
         android:textColor="#777777"
-        android:textSize="12sp" />    
+        android:textSize="12sp"
+        android:layout_below="@+id/date_tv"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView" />
 
 </RelativeLayout>

@@ -27,7 +27,9 @@
             android:layout_height="match_parent"
             android:textSize="12sp"
             android:id="@+id/range_tv"
-            android:textColor="#343234" />
+            android:textColor="#343234"
+            android:text="Today"
+            android:paddingTop="15dp" />
 
         <ImageButton
             android:layout_width="wrap_content"

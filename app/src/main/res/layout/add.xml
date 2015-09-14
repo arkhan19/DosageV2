@@ -21,11 +21,11 @@
         android:text="Add"
         android:onClick="onClick"
         android:id="@+id/toggleButton1"
-        android:layout_below="@+id/msg_et"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="39dp"
         android:textOn="Regular"
-        android:textOff="Once"/>
+        android:textOff="Once"
+        android:layout_below="@+id/msg_et"
+        android:layout_centerHorizontal="true" />
 
     <ViewSwitcher
         android:layout_width="wrap_content"
@@ -60,9 +60,8 @@
         android:layout_height="wrap_content"
         android:text="Enable Ringtone"
         android:id="@+id/sound_cb"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/toggleButton1"
-        android:layout_toLeftOf="@+id/toggleButton1"/>
+        android:layout_above="@+id/button"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

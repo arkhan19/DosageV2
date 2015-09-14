@@ -12,8 +12,6 @@ import healerkart.com.dosage.R;
 
 public class AlarmReceiver extends BroadcastReceiver {
 	
-//	private static final String TAG = "AlarmReceiver";
-
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		long alarmMsgId = intent.getLongExtra(AlarmMsg.COL_ID, -1);

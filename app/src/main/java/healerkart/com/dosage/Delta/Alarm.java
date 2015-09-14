@@ -49,13 +49,11 @@ public class Alarm extends AbstractModel {
 		cv.put(COL_MODIFIEDTIME, now);
 		cv.put(COL_NAME, name==null ? "" : name);
 		cv.put(COL_FROMDATE, fromDate);
-		//if (toDate != null)
-		cv.put(COL_TODATE, toDate==null ? "" : toDate);
-		//{cv.put(COL_TODATE, toDate);}
-		cv.put(COL_RULE, rule==null ? "" : rule);
-		//cv.put(COL_RULE, rule);
-		//cv.put(COL_INTERVAL, interval);
-		cv.put(COL_INTERVAL, interval==null ? "" : interval);
+		if (toDate != null)
+		//cv.put(COL_TODATE, toDate==null ? "" : toDate);
+		{cv.put(COL_TODATE, toDate);}
+		cv.put(COL_RULE, rule);
+		cv.put(COL_INTERVAL, interval);
 		cv.put(COL_SOUND, sound ? 1 : 0);
 
 		return db.insert(TABLE_NAME, null, cv);

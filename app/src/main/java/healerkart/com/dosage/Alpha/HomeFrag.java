@@ -1,6 +1,6 @@
 package healerkart.com.dosage.Alpha;
 //Learn another method that StartManagingCursor to manage Cursor to keep it off the UI thread. Else just use it and give the final version by sunday.
-import android.app.Fragment;
+import android.app.DialogFragment;
 import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
@@ -9,41 +9,29 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
-import android.widget.ViewSwitcher;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import healerkart.com.dosage.Delta.Alarm;
 import healerkart.com.dosage.Delta.AlarmMsg;
 import healerkart.com.dosage.Delta.AlarmService;
-import healerkart.com.dosage.Delta.AlarmTime;
-import healerkart.com.dosage.Delta.DBHelper;
 import healerkart.com.dosage.Delta.DosageDB;
 import healerkart.com.dosage.Delta.Util;
-import healerkart.com.dosage.DialogFrag.PickerDialogFrag;
-import healerkart.com.dosage.DialogFrag.PickerDialogFrag2;
-import healerkart.com.dosage.DialogFrag.PickerDialogFrag3;
+import healerkart.com.dosage.DialogFrag.OptionFragment;
 import healerkart.com.dosage.R;
 //Use Alarm Manager
 
@@ -53,22 +41,19 @@ public class HomeFrag extends ListFragment {
     private TextView range;
     private ImageButton prev;
     private ImageButton next;
-
+    //For Context Attributes
+    private Alarm alarm = new Alarm();
+    private AlarmMsg alarmMsg = new AlarmMsg();
 
     // Attributes
     private Context mContext;
     private LayoutInflater mLayoutInflater;
     private SQLiteDatabase db;
-    private List<String> mResults;
-    private Cursor mCursor;
+
 
     // Elements
     private ListView mListView;
     private SimpleCursorAdapter mListAdapter;
-
-    // Constants
-    private final String DB = "TestDB";
-    private final String TABLE_NAME = "addcamera";
 
     //Range Attributes
     public final Calendar cal = Calendar.getInstance();
@@ -82,7 +67,9 @@ public class HomeFrag extends ListFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         int r =DosageDB.getDateRange();
+
         switch(r) {
             case 3: // Yearly
                 cal.set(Calendar.MONTH, 0);
@@ -108,22 +95,25 @@ public class HomeFrag extends ListFragment {
                              Bundle savedInstanceState) {
         // Set our attributes
         mContext = getActivity();
+        //mListView = getListView();
         mLayoutInflater = inflater;
         //For Range
         monthArr = getResources().getStringArray(R.array.spinner3_arr);
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.home, container, false);
         // Init
         init(view);
         findview(view);
+        range.setText(getRangeStr());
 
         prev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 move(-1);
                 range.setText(getRangeStr());
-                //((SimpleCursorAdapter)getListAdapter()).changeCursor(createCursor());
-                Toast.makeText(getActivity(), "Previous Button Clicked", Toast.LENGTH_SHORT).show();
+                ((SimpleCursorAdapter)getListAdapter()).changeCursor(createCursor());
+                //Toast.makeText(getActivity(), "Previous Button Clicked", Toast.LENGTH_SHORT).show();
             }
         });
         next.setOnClickListener(new View.OnClickListener() {
@@ -131,13 +121,15 @@ public class HomeFrag extends ListFragment {
             public void onClick(View v) {
                 move(+1);
                 range.setText(getRangeStr());
-                //((SimpleCursorAdapter)getListAdapter()).changeCursor(createCursor());
-                Toast.makeText(getActivity(), "Next Button Clicked", Toast.LENGTH_SHORT).show();
+                ((SimpleCursorAdapter)getListAdapter()).changeCursor(createCursor());
+                //Toast.makeText(getActivity(), "Next Button Clicked", Toast.LENGTH_SHORT).show();
             }
         });
-        // Get the database handler & the cursor
+        // Get the database handler
         db =  DosageDB.db;
-        //mCursor = db.rawQuery("SELECT CameraName FROM " + TABLE_NAME , null);
+
+
+
         return view;
 
 
@@ -190,7 +182,7 @@ public class HomeFrag extends ListFragment {
             }
         });
         setListAdapter(mListAdapter);
-        //range.setText(getRangeStr());
+
 
     }
     public void findview(View v)
@@ -247,10 +239,89 @@ public class HomeFrag extends ListFragment {
     }
 
     @Override
-    public void onListItemClick(ListView l, View v, int pos, long id) {
+    public void onListItemClick(final ListView l, View v, final int pos, long id) {
 
-        Toast.makeText(mContext, "CLICKED ON POS #" + pos + "!", Toast.LENGTH_SHORT).show();
+        registerForContextMenu(l);
+        //code to get the listView instance using findViewByID etc
+        /*v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                //getActivity().getApplicationContext(v);
+                //OptionFragment opt = new OptionFragment();
+                //opt.show(getFragmentManager(), "Option");
+                //Toast.makeText(getActivity(), "At Time", Toast.LENGTH_SHORT).show();
+            }
+        });*/
     }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        if (v.getId() == android.R.id.list) {
+            getActivity().getMenuInflater().inflate(R.menu.context_menu, menu);
+            menu.setHeaderTitle("Choose an Option");
+            menu.setHeaderIcon(R.drawable.option_icon);
+
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+            alarmMsg.setId(info.id);
+            alarmMsg.load(db);
+            if (alarmMsg.getDateTime() < System.currentTimeMillis())
+                menu.removeItem(R.id.menu_edit);
+        }
+    }
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        boolean refresh = false;
+
+        switch (item.getItemId()) {
+            case R.id.menu_edit:
+                alarmMsg.setId(info.id);
+                alarmMsg.load(db);
+                alarm.reset();
+                alarm.setId(alarmMsg.getAlarmId());
+                alarm.load(db);
+                OptionFragment opt = new OptionFragment();
+                opt.show(getFragmentManager(), "Option");
+
+                //SimpleCursorAdapter adapter = (SimpleCursorAdapter) getListAdapter();
+                //adapter.getCursor().requery();
+                //adapter.notifyDataSetChanged();
+                break;
+
+            case R.id.menu_delete:
+                DosageDB.dbHelper.cancelNotification(db, info.id, false);
+                refresh = true;
+
+                Intent cancelThis = new Intent(getActivity(), AlarmService.class);
+                cancelThis.putExtra(AlarmMsg.COL_ID, String.valueOf(info.id));
+                cancelThis.setAction(AlarmService.CANCEL);
+                getActivity().startService(cancelThis);
+                break;
+
+            case R.id.menu_delete_repeating:
+                alarmMsg.setId(info.id);
+                alarmMsg.load(db);
+                DosageDB.dbHelper.cancelNotification(db, alarmMsg.getAlarmId(), true);
+                refresh = true;
+
+                Intent cancelRepeating = new Intent(getActivity(), AlarmService.class);
+                cancelRepeating.putExtra(AlarmMsg.COL_ALARMID, String.valueOf(alarmMsg.getAlarmId()));
+                cancelRepeating.setAction(AlarmService.CANCEL);
+                getActivity().startService(cancelRepeating);
+                break;
+        }
+
+        if (refresh) {
+            SimpleCursorAdapter adapter = (SimpleCursorAdapter) getListAdapter();
+            adapter.getCursor().requery();
+            adapter.notifyDataSetChanged();
+        }
+
+        return true;
+    }
+
+
 
 }
